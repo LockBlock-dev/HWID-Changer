@@ -112,7 +112,19 @@ namespace HWID_Changer
             MachineId.SetValue("MachineId", $"{{{Guid.NewGuid()}}}");
 
             using RegistryKey SystemInfo = Registry.LocalMachine.OpenSubKey("SYSTEM\\CurrentControlSet\\Control\\SystemInformation", true);
-            SystemInfo.SetValue("BIOSReleaseDate", "14/12/2020");
+
+            Random rnd = new Random();
+            int day = rnd.Next(1, 31);
+            string dayStr = "";
+            if (day < 10) dayStr = $"0{day}";
+            else dayStr = day.ToString();
+
+            int month = rnd.Next(1, 13);
+            string monthStr = "";
+            if (month < 10) monthStr = $"0{month}";
+            else monthStr = month.ToString();
+
+            SystemInfo.SetValue("BIOSReleaseDate", $"{dayStr}/{monthStr}/{rnd.Next(2000, 2023)}");
             SystemInfo.SetValue("BIOSVersion", RandomId(10));
             SystemInfo.SetValue("ComputerHardwareId", $"{{{Guid.NewGuid()}}}");
             SystemInfo.SetValue("ComputerHardwareIds", $"{{{Guid.NewGuid()}}}\n{{{Guid.NewGuid()}}}\n{{{Guid.NewGuid()}}}\n");
