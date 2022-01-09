@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net.NetworkInformation;
-using System.Text;
 using Microsoft.Win32;
 
 namespace HWID_Changer
